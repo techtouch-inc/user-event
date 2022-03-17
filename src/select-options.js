@@ -1,4 +1,4 @@
-import {createEvent, getConfig, fireEvent} from '@testing-library/dom'
+import {createEvent, fireEvent} from './dom/events'
 import {isInstanceOfElement} from './utils'
 import {click} from './click'
 import {focus} from './focus'
@@ -6,9 +6,8 @@ import {hover, unhover} from './hover'
 
 function selectOptionsBase(newValue, select, values, init) {
   if (!newValue && !select.multiple) {
-    throw getConfig().getElementError(
+    throw new Error(
       `Unable to deselect an option in a non-multiple select. Use selectOptions to change the selection instead.`,
-      select,
     )
   }
   const valArray = Array.isArray(values) ? values : [values]
@@ -26,10 +25,7 @@ function selectOptionsBase(newValue, select, values, init) {
         if (matchingOption) {
           return matchingOption
         } else {
-          throw getConfig().getElementError(
-            `Value "${val}" not found in options`,
-            select,
-          )
+          throw new Error(`Value "${val}" not found in options`)
         }
       }
     })
@@ -71,10 +67,7 @@ function selectOptionsBase(newValue, select, values, init) {
       fireEvent.mouseUp(select, init)
       fireEvent.click(select, init)
     } else {
-      throw getConfig().getElementError(
-        `Cannot select multiple options on a non-multiple select`,
-        select,
-      )
+      throw new Error(`Cannot select multiple options on a non-multiple select`)
     }
   } else if (select.getAttribute('role') === 'listbox') {
     selectedOptions.forEach(option => {
@@ -83,9 +76,8 @@ function selectOptionsBase(newValue, select, values, init) {
       unhover(option, init)
     })
   } else {
-    throw getConfig().getElementError(
+    throw new Error(
       `Cannot select options on elements that are neither select nor listbox elements`,
-      select,
     )
   }
 

@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setup} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 // Note, use the setup function at the bottom of the file...
 // but don't hurt yourself trying to read it 😅
 

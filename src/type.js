@@ -1,8 +1,5 @@
 // TODO: wrap in asyncWrapper
-import {
-  fireEvent,
-  getConfig as getDOMTestingLibraryConfig,
-} from '@testing-library/dom'
+import {fireEvent} from './dom/events'
 
 import {
   getActiveElement,
@@ -132,9 +129,9 @@ async function type(element, text, {delay = 0, ...options} = {}) {
   // if the delay is greater than 0
   let result
   if (delay > 0) {
-    await getDOMTestingLibraryConfig().asyncWrapper(async () => {
+    await (async () => {
       result = await typeImpl(element, text, {delay, ...options})
-    })
+    })()
   } else {
     result = typeImpl(element, text, {delay, ...options})
   }

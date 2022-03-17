@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setup} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('should paste text in input', () => {
   const {element, getEventSnapshot} = setup('<input />')
 
