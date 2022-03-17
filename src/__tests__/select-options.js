@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setupSelect, addListeners, setupListbox, setup} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('fires correct events', () => {
   const {select, options, getEventSnapshot} = setupSelect()
   userEvent.selectOptions(select, '2')

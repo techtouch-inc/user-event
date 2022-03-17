@@ -1,4 +1,4 @@
-import {fireEvent} from '@testing-library/dom'
+import {fireEvent} from './dom/events'
 import {
   getMouseEventOptions,
   isLabelWithInternallyDisabledControl,
@@ -7,6 +7,7 @@ import {
 import {hover} from './hover'
 import {blur} from './blur'
 import {focus} from './focus'
+import {closest} from './utils/closest'
 
 function getPreviouslyFocusedElement(element) {
   const focusedElement = element.ownerDocument.activeElement
@@ -77,7 +78,7 @@ function clickElement(element, init, {clickCount}) {
       getMouseEventOptions('mouseup', init, clickCount),
     )
     fireEvent.click(element, getMouseEventOptions('click', init, clickCount))
-    const parentLabel = element.closest('label')
+    const parentLabel = closest(element, 'label')
     if (parentLabel?.control) focus(parentLabel.control, init)
   }
 }

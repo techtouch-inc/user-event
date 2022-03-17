@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setup} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('clears text', () => {
   const {element, getEventSnapshot} = setup('<input value="hello" />')
   userEvent.clear(element)

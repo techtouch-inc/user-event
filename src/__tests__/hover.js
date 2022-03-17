@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {addEventListener, setup} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('hover', () => {
   const {element, getEventSnapshot} = setup('<button />')
 

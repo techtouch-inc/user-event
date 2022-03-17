@@ -6,7 +6,7 @@ function focus(element) {
   const isAlreadyActive = getActiveElement(element.ownerDocument) === element
   if (isAlreadyActive) return
 
-  eventWrapper(() => element.focus())
+  eventWrapper(() => element.focus({preventScroll: true}))
 }
 
 export {focus}

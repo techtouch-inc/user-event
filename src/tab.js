@@ -1,4 +1,4 @@
-import {fireEvent} from '@testing-library/dom'
+import {fireEvent} from './dom/events'
 import {getActiveElement, FOCUSABLE_SELECTOR, isVisible} from './utils'
 import {focus} from './focus'
 import {blur} from './blur'
@@ -34,8 +34,7 @@ function tab({shift = false, focusTrap} = {}) {
       (el.getAttribute('tabindex') !== '-1' &&
         !el.disabled &&
         // Hidden elements are not tabable
-        isVisible(el)
-      ),
+        isVisible(el)),
   )
 
   if (enabledElements.length === 0) return

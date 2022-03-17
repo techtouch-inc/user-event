@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setup, addEventListener, addListeners} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('click in button', () => {
   const {element, getEventSnapshot} = setup('<button />')
   userEvent.click(element)

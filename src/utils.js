@@ -1,5 +1,5 @@
-import {getConfig} from '@testing-library/dom'
-import {getWindowFromNode} from '@testing-library/dom/dist/helpers'
+import {getWindowFromNode} from './dom/getWindowFromNode'
+import {matches} from './utils/matches'
 
 // isInstanceOfElement can be removed once the peerDependency for @testing-library/dom is bumped to a version that includes https://github.com/testing-library/dom-testing-library/pull/885
 /**
@@ -12,7 +12,10 @@ function isInstanceOfElement(element, elementType) {
   try {
     const window = getWindowFromNode(element)
     // Window usually has the element constructors as properties but is not required to do so per specs
-    if (typeof window[elementType] === 'function') {
+    if (
+      typeof window[elementType] === 'function' ||
+      typeof window[elementType] === 'object'
+    ) {
       return element instanceof window[elementType]
     }
   } catch (e) {
@@ -272,7 +275,7 @@ const FOCUSABLE_SELECTOR = [
 function isFocusable(element) {
   return (
     !isLabelWithInternallyDisabledControl(element) &&
-    element?.matches(FOCUSABLE_SELECTOR)
+    matches(element, FOCUSABLE_SELECTOR)
   )
 }
 
@@ -296,7 +299,7 @@ function isClickableInput(element) {
 function isVisible(element) {
   const getComputedStyle = getWindowFromNode(element).getComputedStyle
 
-  for(; element && element.ownerDocument; element = element.parentNode) {
+  for (; element && element.ownerDocument; element = element.parentNode) {
     const display = getComputedStyle(element).display
     if (display === 'none') {
       return false
@@ -308,9 +311,7 @@ function isVisible(element) {
 
 function eventWrapper(cb) {
   let result
-  getConfig().eventWrapper(() => {
-    result = cb()
-  })
+  result = cb()
   return result
 }
 

@@ -1,6 +1,8 @@
 import userEvent from '../'
 import {setup, addListeners} from './helpers/utils'
 
+jest.mock('../dom/events')
+
 test('should fire the correct events for input', () => {
   const file = new File(['hello'], 'hello.png', {type: 'image/png'})
   const {element, getEventSnapshot} = setup('<input type="file" />')
@@ -180,9 +182,9 @@ test.each([
       new File(['there'], 'there.jpg', {type: 'video/mp4'}),
     ]
     const {element} = setup(`
-    <input 
-      type="file" 
-      accept="${acceptAttribute}" multiple 
+    <input
+      type="file"
+      accept="${acceptAttribute}" multiple
     />
   `)
 

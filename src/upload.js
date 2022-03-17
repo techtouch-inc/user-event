@@ -1,4 +1,4 @@
-import {fireEvent, createEvent} from '@testing-library/dom'
+import {fireEvent, createEvent} from './dom/events'
 import {click} from './click'
 import {blur} from './blur'
 import {focus} from './focus'

@@ -1,4 +1,4 @@
-import {eventMap} from '@testing-library/dom/dist/event-map'
+import {eventMap} from '../../dom/eventMap'
 // this is pretty helpful:
 // https://codesandbox.io/s/quizzical-worker-eo909
 

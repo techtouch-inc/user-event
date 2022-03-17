@@ -1,6 +1,6 @@
 // this helps us track what the state is before and after an event is fired
 // this is needed for determining the snapshot values
-const actual = jest.requireActual('@testing-library/dom')
+const actual = jest.requireActual('../events')
 
 function getTrackedElementValues(element) {
   return {

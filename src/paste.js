@@ -1,4 +1,4 @@
-import {fireEvent} from '@testing-library/dom'
+import {fireEvent} from './dom/events'
 import {
   setSelectionRangeIfNecessary,
   calculateNewValue,
